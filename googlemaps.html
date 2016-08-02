@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #map {
+        width: 500px;
+        height: 400px;
+      }
+      #description {
+        width: 500px;
+        height: 100px;
+        text-align: center;
+        opacity: 0.0;
+        font-size: 36px;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="map"></div>
+    <script>
+     function initMap() {
+      var latLong = {lat: 30.2747, lng: -97.7404};
+      var mapDiv = document.getElementById('map');
+      var map = new google.maps.Map(mapDiv, {
+        center: latLong,
+        scrollwheel: false,
+        mapTypeId: google.maps.MapTypeId.HYBRID,
+        zoom: 15
+      });
+      
+      var iconBase = 'https://maps.google.com/mapfiles/kml/shapes/';
+      var marker = new google.maps.Marker({
+        position: latLong,
+        map: map,
+        draggable: false,
+        title: "Drag me!",
+        icon: iconBase + 'schools_maps.png'
+      });
+
+      marker.addListener('click', function() {
+        map.setZoom(18);
+        document.getElementById("description").style.opacity = "1.0";
+      });
+      marker.clickable = true;
+      marker.setLabel("Texas State Capital");
+     }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+         async defer></script>
+
+    <div id="description">Texas State Capital</div>
+  </body>
+</html>
